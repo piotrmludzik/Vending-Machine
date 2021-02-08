@@ -69,4 +69,13 @@ public class MachineTest {
 
         assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
     }
+
+    @Test
+    public void removeProduct_productThatNoExistInStock_IllegalStateException() {
+        vendingMachine.removeProduct(CANDY);
+
+        assertThrows(
+                IllegalStateException.class,
+                () -> vendingMachine.removeProduct(CANDY));
+    }
 }
