@@ -38,6 +38,13 @@ public class Machine {
     }
 
     public void removeProduct(Product product) {
-        productsInMachine.remove(product);
+        int actualAmount = 0;
+        if (productsInMachine.containsKey(product))
+            actualAmount = productsInMachine.get(product);
+
+        if (actualAmount == 1)  // only one product left
+            productsInMachine.remove(product);
+        else
+            productsInMachine.put(product, actualAmount - 1);
     }
 }
