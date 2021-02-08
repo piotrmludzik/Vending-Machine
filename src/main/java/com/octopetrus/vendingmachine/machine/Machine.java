@@ -11,6 +11,20 @@ public class Machine {
     private final Map<Product, Integer> productsInMachine = new HashMap<>();
     private final Map<Coin, Integer> coinsInMachine = new HashMap<>();
 
+    public Machine() {}
+
+    public Machine(Map<Product, Integer> products) {
+        productsInMachine.putAll(products);
+    }
+
+    public Map<Product, Integer> getProductsInMachine() {
+        return productsInMachine;
+    }
+
+    public Map<Coin, Integer> getCoinsInMachine() {
+        return coinsInMachine;
+    }
+
     public void addProduct(Product product) {
         addProduct(product, 1);
     }
