@@ -46,4 +46,27 @@ public class MachineTest {
 
         assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
     }
+
+    @Test
+    public void removeExistingProduct_existingProduct_decreaseProductInStock() {
+        vendingMachine.removeProduct(COLA);
+
+        Map<Product, Integer> resultOfProductsInMachine = Map.of(
+                COLA, 2,
+                CHIPS, 7,
+                CANDY, 1);
+
+        assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
+    }
+
+    @Test
+    public void removeLastProduct_existingProduct_removeProductFromStock() {
+        vendingMachine.removeProduct(CANDY);
+
+        Map<Product, Integer> resultOfProductsInMachine = Map.of(
+                COLA, 3,
+                CHIPS, 7);
+
+        assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
+    }
 }
