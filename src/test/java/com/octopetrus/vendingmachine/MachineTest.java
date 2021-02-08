@@ -36,7 +36,7 @@ public class MachineTest {
     }
 
     @Test
-    public void addExistProduct_existProduct_increaseProductInStock() {
+    public void addExistingProduct_existingProduct_increaseProductInStock() {
         vendingMachine.addProduct(COLA, 7);
 
         Map<Product, Integer> resultOfProductsInMachine = Map.of(
