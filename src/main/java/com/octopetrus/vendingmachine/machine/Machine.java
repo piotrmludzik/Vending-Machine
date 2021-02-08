@@ -13,8 +13,9 @@ public class Machine {
 
     public Machine() {}
 
-    public Machine(Map<Product, Integer> products) {
+    public Machine(Map<Product, Integer> products, Map<Coin, Integer> coins) {
         productsInMachine.putAll(products);
+        coinsInMachine.putAll(coins);
     }
 
     public Map<Product, Integer> getProductsInMachine() {
@@ -38,10 +39,10 @@ public class Machine {
     }
 
     public void removeProduct(Product product) {
-        int actualAmount = 0;
-        if (productsInMachine.containsKey(product))
-            actualAmount = productsInMachine.get(product);
+        if (!productsInMachine.containsKey(product))
+            throw new IllegalStateException(product.getName() + " not exist in the machine. It has not been removed.");
 
+        int actualAmount = productsInMachine.get(product);
         if (actualAmount == 1)  // only one product left
             productsInMachine.remove(product);
         else
