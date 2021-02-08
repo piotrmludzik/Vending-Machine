@@ -34,4 +34,16 @@ public class MachineTest {
 
         assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
     }
+
+    @Test
+    public void addExistProduct_existProduct_increaseProductInStock() {
+        vendingMachine.addProduct(COLA, 7);
+
+        Map<Product, Integer> resultOfProductsInMachine = Map.of(
+                COLA, 10,
+                CHIPS, 7,
+                CANDY, 1);
+
+        assertEquals(resultOfProductsInMachine, vendingMachine.getProductsInMachine());
+    }
 }
