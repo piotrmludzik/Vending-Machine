@@ -1,0 +1,13 @@
+### IDE ###
+.idea/
+out/
+*.iml
+
+
+### Maven ###
+target/
+
+
+### temporary ###
+temp/
+*.tmp
