@@ -1,9 +1,9 @@
 package com.octopetrus.vendingmachine;
 
 import com.octopetrus.vendingmachine.coins.Coin;
-
 import com.octopetrus.vendingmachine.coins.CoinFactory;
 import com.octopetrus.vendingmachine.coins.CoinTypes;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
