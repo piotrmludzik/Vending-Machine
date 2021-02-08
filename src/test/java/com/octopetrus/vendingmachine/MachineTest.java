@@ -23,7 +23,7 @@ public class MachineTest {
     private final Machine vendingMachine = new Machine(productsInMachine);
 
     @Test
-    public void addNewProduct_newProduct_productAddToStock() {
+    public void addProduct_oneNewProduct_productAddToStock() {
         vendingMachine.addProduct(BUBBLE_GUM, 1);
 
         Map<Product, Integer> resultOfProductsInMachine = Map.of(
@@ -36,7 +36,7 @@ public class MachineTest {
     }
 
     @Test
-    public void addExistingProduct_existingProduct_increaseProductInStock() {
+    public void addProduct_sevenPiecesOfExistingProducts_increaseAmountOfProductInStock() {
         vendingMachine.addProduct(COLA, 7);
 
         Map<Product, Integer> resultOfProductsInMachine = Map.of(
@@ -48,7 +48,7 @@ public class MachineTest {
     }
 
     @Test
-    public void removeExistingProduct_existingProduct_decreaseProductInStock() {
+    public void removeProduct_existingProduct_decreaseAmountOfProductInStock() {
         vendingMachine.removeProduct(COLA);
 
         Map<Product, Integer> resultOfProductsInMachine = Map.of(
@@ -60,7 +60,7 @@ public class MachineTest {
     }
 
     @Test
-    public void removeLastProduct_existingProduct_removeProductFromStock() {
+    public void removeProduct_lastPieceOfProductInStock_removeProductFromStock() {
         vendingMachine.removeProduct(CANDY);
 
         Map<Product, Integer> resultOfProductsInMachine = Map.of(

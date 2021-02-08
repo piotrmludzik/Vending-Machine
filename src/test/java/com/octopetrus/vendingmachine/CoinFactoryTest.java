@@ -29,14 +29,14 @@ public class CoinFactoryTest {
     }
 
     @Test
-    public void getCoinName_invalidCoin_validName() {
+    public void getCoinName_invalidCoin_IllegalStateException() {
         assertThrows(
                 IllegalStateException.class,
                 () -> coinFactory.getName(INVALID_COIN));
     }
 
     @Test
-    public void getCoinValue_invalidCoin_validValue() {
+    public void getCoinValue_invalidCoin_IllegalStateException() {
         assertThrows(
                 IllegalStateException.class,
                 () -> coinFactory.getValue(INVALID_COIN));
