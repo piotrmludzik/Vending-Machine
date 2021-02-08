@@ -30,7 +30,11 @@ public class Machine {
     }
 
     public void addProduct(Product product, int amount) {
-        productsInMachine.put(product, amount);
+        int actualAmount = 0;
+        if (productsInMachine.containsKey(product))
+            actualAmount = productsInMachine.get(product);
+
+        productsInMachine.put(product, amount + actualAmount);
     }
 
     public void removeProduct(Product product) {
