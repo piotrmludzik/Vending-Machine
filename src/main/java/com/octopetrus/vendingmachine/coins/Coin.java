@@ -9,4 +9,9 @@ public class Coin {
         this.weight = weight;
         this.size = size;
     }
+
+    @Override
+    public String toString() {
+        return new CoinFactory().getValue(this) + "$";
+    }
 }
