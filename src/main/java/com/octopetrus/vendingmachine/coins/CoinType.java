@@ -1,6 +1,6 @@
 package com.octopetrus.vendingmachine.coins;
 
-public enum CoinTypes {
+public enum CoinType {
 
     CENT ("Cent", 0.01, 2.500, 19.05),
     NICKEL ("Nickel", 0.05, 5.000, 21.21),
@@ -14,7 +14,7 @@ public enum CoinTypes {
     public final double weight;
     public final double size;
 
-    CoinTypes(String name, double value, double weight, double size) {
+    CoinType(String name, double value, double weight, double size) {
         this.name = name;
         this.value = value;
         this.weight = weight;

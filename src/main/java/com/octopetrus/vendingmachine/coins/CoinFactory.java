@@ -3,7 +3,7 @@ package com.octopetrus.vendingmachine.coins;
 public class CoinFactory {
 
     public String getName(Coin coin) {
-        for (CoinTypes coinType : CoinTypes.values()) {
+        for (CoinType coinType : CoinType.values()) {
             if (coinType.weight == coin.weight && coinType.size == coin.size)
                 return coinType.name;
         }
@@ -12,7 +12,7 @@ public class CoinFactory {
     }
 
     public double getValue(Coin coin) {
-        for (CoinTypes coinType : CoinTypes.values()) {
+        for (CoinType coinType : CoinType.values()) {
             if (coinType.weight == coin.weight && coinType.size == coin.size)
                 return coinType.value;
         }

@@ -2,7 +2,7 @@ package com.octopetrus.vendingmachine;
 
 import com.octopetrus.vendingmachine.coins.Coin;
 import com.octopetrus.vendingmachine.coins.CoinFactory;
-import com.octopetrus.vendingmachine.coins.CoinTypes;
+import com.octopetrus.vendingmachine.coins.CoinType;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,14 +17,14 @@ public class CoinFactoryTest {
     @Test
     public void getCoinName_validCoin_validName() {
         assertEquals(
-                CoinTypes.QUARTER.name,
+                CoinType.QUARTER.name,
                 coinFactory.getName(VALID_COIN));
     }
 
     @Test
     public void getCoinValue_validCoin_validValue() {
         assertEquals(
-                CoinTypes.QUARTER.value,
+                CoinType.QUARTER.value,
                 coinFactory.getValue(VALID_COIN));
     }
 
