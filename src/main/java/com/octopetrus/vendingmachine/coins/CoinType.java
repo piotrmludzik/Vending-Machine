@@ -27,7 +27,7 @@ public enum CoinType {
                 return coinType.name;
         }
 
-        throw new IllegalStateException("Not know the coin name with given " + getCoinProperties(coin) + ".");
+        throw new IllegalStateException(getIllegalCoinTypeMessage(coin));
     }
 
     public static double getValue(Coin coin) {
@@ -36,10 +36,10 @@ public enum CoinType {
                 return coinType.value;
         }
 
-        throw new IllegalStateException("Not know the coin value with given " + getCoinProperties(coin) + ".");
+        throw new IllegalStateException(getIllegalCoinTypeMessage(coin));
     }
 
-    private static String getCoinProperties(Coin coin) {
-        return String.format("weight (%s g) and size (%s mmm)", coin.weight, coin.size);
+    private static String getIllegalCoinTypeMessage(Coin coin) {
+        return String.format("Not know a type of the given coin with weight = %sg and size = %s mm.", coin.weight, coin.size);
     }
 }
