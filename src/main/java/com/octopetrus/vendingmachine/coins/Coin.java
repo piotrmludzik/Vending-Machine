@@ -6,6 +6,9 @@ public class Coin {
     public final double size;
 
     public Coin(double weight, double size) {
+        if (weight <= 0 || size <= 0)
+            throw new IllegalArgumentException("A coin should have weight and size greater than zero.");
+
         this.weight = weight;
         this.size = size;
     }
