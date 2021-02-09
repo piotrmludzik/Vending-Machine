@@ -2,6 +2,10 @@ package com.octopetrus.vendingmachine.coins;
 
 public class CoinFactory {
 
+    public Coin createCoin(CoinType coinType) {
+        return new Coin(coinType.weight, coinType.size);
+    }
+
     public String getName(Coin coin) {
         for (CoinType coinType : CoinType.values()) {
             if (coinType.weight == coin.weight && coinType.size == coin.size)
