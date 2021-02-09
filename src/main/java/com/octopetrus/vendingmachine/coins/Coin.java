@@ -15,6 +15,6 @@ public class Coin {
 
     @Override
     public String toString() {
-        return new CoinFactory().getValue(this) + "$";
+        return CoinType.getValue(this) + "$";
     }
 }

@@ -1,7 +1,6 @@
 package com.octopetrus.vendingmachine;
 
 import com.octopetrus.vendingmachine.coins.Coin;
-import com.octopetrus.vendingmachine.coins.CoinFactory;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
 import org.junit.jupiter.api.Test;
@@ -12,33 +11,31 @@ public class CoinFactoryTest {
     private final Coin VALID_COIN = new Coin(5.670, 24.26);  // Quarter dollar
     private final Coin INVALID_COIN = new Coin(5.660, 24.26);
 
-    private final CoinFactory coinFactory = new CoinFactory();
-
     @Test
     public void getCoinName_validCoin_validName() {
         assertEquals(
                 CoinType.QUARTER.name,
-                coinFactory.getName(VALID_COIN));
+                CoinType.getName(VALID_COIN));
     }
 
     @Test
     public void getCoinValue_validCoin_validValue() {
         assertEquals(
                 CoinType.QUARTER.value,
-                coinFactory.getValue(VALID_COIN));
+                CoinType.getValue(VALID_COIN));
     }
 
     @Test
     public void getCoinName_invalidCoin_IllegalStateException() {
         assertThrows(
                 IllegalStateException.class,
-                () -> coinFactory.getName(INVALID_COIN));
+                () -> CoinType.getName(INVALID_COIN));
     }
 
     @Test
     public void getCoinValue_invalidCoin_IllegalStateException() {
         assertThrows(
                 IllegalStateException.class,
-                () -> coinFactory.getValue(INVALID_COIN));
+                () -> CoinType.getValue(INVALID_COIN));
     }
 }
