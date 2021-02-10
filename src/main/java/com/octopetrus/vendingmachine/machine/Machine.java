@@ -68,7 +68,10 @@ public class Machine {
     }
 
     private void addCoinToMachine() {
-        int actualAmount = coinsInMachine.get(takenCoin);
+        int actualAmount = 0;
+        if (coinsInMachine.containsKey(takenCoin))
+            actualAmount = coinsInMachine.get(takenCoin);
+
         coinsInMachine.put(takenCoin, actualAmount + 1);
     }
 
