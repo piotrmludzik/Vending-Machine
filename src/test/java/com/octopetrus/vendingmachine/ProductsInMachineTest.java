@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
-public class MachineTest {
+public class ProductsInMachineTest {
 
     private final Product COLA = new Product("Cola", 1.00);
     private final Product CHIPS = new Product("Chips", 0.50);
