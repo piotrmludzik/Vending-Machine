@@ -3,6 +3,7 @@ package com.octopetrus.vendingmachine.machine;
 import com.octopetrus.vendingmachine.coins.Coin;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class MoneyCtrl {
@@ -17,8 +18,15 @@ public class MoneyCtrl {
         this.coinsInStock = coinsInStock;
     }
 
-    protected Map<Coin, Integer> getAmountOfCoinsInStock() {  // TODO: should return a coin names and amounts.
-        return coinsInStock;
+    protected Map<String, Integer> getAmountOfCoinsInStock() {
+        Map<String, Integer> coins = new HashMap<>();
+        for (Map.Entry<Coin, Integer> e : coinsInStock.entrySet()) {
+            String coinName = CoinType.getName(e.getKey());
+            int coinAmount = e.getValue();
+            coins.put(coinName, coinAmount);
+        }
+
+        return coins;
     }
 
     protected double getAmountOfTakenCoins() {
