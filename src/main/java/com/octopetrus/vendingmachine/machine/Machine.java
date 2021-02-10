@@ -17,6 +17,10 @@ public class Machine {
         moneyCtrl.putCoinsIntoMachine(coins);
     }
 
+    public double getAmountOfTakenCoins() {
+        return moneyCtrl.getAmountOfTakenCoins();
+    }
+
     public Map<Coin, Integer> getCoinsInMachine() {
         return moneyCtrl.getCoinsInMachine();
     }
@@ -25,19 +29,8 @@ public class Machine {
         moneyCtrl.takeCoin(coin);
     }
 
-    public double getAmountOfTakenCoins() {
-        return moneyCtrl.getAmountOfTakenCoins();
-    }
-
     public Map<Product, Integer> getProductsInMachine() {
         return productsCtrl.getProductsInMachine();
-    }
-
-    public void addProduct(Product product) {  // TODO: this is a redundant function!
-        productsCtrl.addProduct(product, 1);
-    }
-    public void addProduct(Product product, int amount) {  // TODO: this is a redundant function!
-        productsCtrl.addProduct(product, amount);
     }
 
     public void takeProduct(Product product) {

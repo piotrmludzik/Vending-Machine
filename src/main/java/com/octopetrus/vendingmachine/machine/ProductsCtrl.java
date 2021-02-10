@@ -18,14 +18,6 @@ public class ProductsCtrl {
             productsInMachine.putAll(products);
     }
 
-    protected void addProduct(Product product, int amount) {
-        int actualAmount = 0;
-        if (productsInMachine.containsKey(product))
-            actualAmount = productsInMachine.get(product);
-
-        productsInMachine.put(product, amount + actualAmount);
-    }
-
     protected void takeProduct(Product product) {
         if (!productsInMachine.containsKey(product))
             throw new IllegalStateException(product.getName() + " not exist in the machine.");
