@@ -20,7 +20,7 @@ public class ProductsInMachineTest {
             CHIPS, 7,
             CANDY, 1);
 
-    private final Machine vendingMachine = new Machine(productsInMachine);
+    private final Machine vendingMachine = new Machine(productsInMachine, null);
 
     @Test
     public void addProduct_oneNewProduct_productAddToStock() {
