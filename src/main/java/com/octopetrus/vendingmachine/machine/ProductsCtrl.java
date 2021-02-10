@@ -6,40 +6,40 @@ import java.util.Map;
 
 public class ProductsCtrl {
 
-    private final Map<Product, Integer> productsInMachine;
+    private final Map<Product, Integer> productsInStock;
 
-    public ProductsCtrl(Map<Product, Integer> productsInMachine) {
-        if (productsInMachine == null)
+    public ProductsCtrl(Map<Product, Integer> productsInStock) {
+        if (productsInStock == null)
             throw new IllegalArgumentException("The products controller of the vending machine cannot work without products.");
 
-        this.productsInMachine = productsInMachine;
+        this.productsInStock = productsInStock;
     }
 
-    protected Map<Product, Integer> getProductsInMachine() {  // TODO: give better name!
-        return productsInMachine;
+    protected Map<Product, Integer> getProductsInStock() {  // TODO: should return a product names and amounts.
+        return productsInStock;
     }
 
     protected Product takeProduct(int productId) {
         Product product = getProductById(productId);
-        removeProductFromMachine(product);
+        removeProductFromStock(product);
 
         return product;
     }
 
     private Product getProductById(int productId) {
         Product productById;
-        for (Product product : productsInMachine.keySet())
+        for (Product product : productsInStock.keySet())
             if (product.getId() == productId)
                 return product;
 
         throw new IllegalStateException("There is no product with the given " + productId + " id.");
     }
 
-    private void removeProductFromMachine(Product product) {
-        int actualAmount = productsInMachine.get(product);
+    private void removeProductFromStock(Product product) {
+        int actualAmount = productsInStock.get(product);
         if (actualAmount == 1)  // only one product left
-            productsInMachine.remove(product);
+            productsInStock.remove(product);
         else
-            productsInMachine.put(product, actualAmount - 1);
+            productsInStock.put(product, actualAmount - 1);
     }
 }
