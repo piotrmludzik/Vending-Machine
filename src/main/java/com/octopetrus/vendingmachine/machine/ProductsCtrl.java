@@ -19,10 +19,23 @@ public class ProductsCtrl {
         return productsInMachine;
     }
 
-    protected void takeProduct(Product product) {  // TODO: should return taken product! Take product by ID!
-        if (!productsInMachine.containsKey(product))
-            throw new IllegalStateException(product.getName() + " not exist in the machine.");
+    protected Product takeProduct(int productId) {
+        Product product = getProductById(productId);
+        removeProductFromMachine(product);
 
+        return product;
+    }
+
+    private Product getProductById(int productId) {
+        Product productById;
+        for (Product product : productsInMachine.keySet())
+            if (product.getId() == productId)
+                return product;
+
+        throw new IllegalStateException("There is no product with the given " + productId + " id.");
+    }
+
+    private void removeProductFromMachine(Product product) {
         int actualAmount = productsInMachine.get(product);
         if (actualAmount == 1)  // only one product left
             productsInMachine.remove(product);
