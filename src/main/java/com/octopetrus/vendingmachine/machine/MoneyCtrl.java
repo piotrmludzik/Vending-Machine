@@ -3,24 +3,25 @@ package com.octopetrus.vendingmachine.machine;
 import com.octopetrus.vendingmachine.coins.Coin;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class MoneyCtrl {
 
-    private final Map<Coin, Integer> coinsInMachine = new HashMap<>();
+    private final Map<Coin, Integer> coinsInMachine;
     private double amountOfTakenCoins = 0;
 
-    protected Map<Coin, Integer> getCoinsInMachine() {
+    public MoneyCtrl(Map<Coin, Integer> coinsInMachine) {
+        if (coinsInMachine == null)
+            throw new IllegalArgumentException("The money controller of the vending machine cannot work without coins.");
+
+        this.coinsInMachine = coinsInMachine;
+    }
+
+    protected Map<Coin, Integer> getCoinsInMachine() {  // TODO: give better name!
         return coinsInMachine;
     }
 
-    protected void putCoinsIntoMachine(Map<Coin, Integer> coins) {
-        if (coins != null)
-            coinsInMachine.putAll(coins);
-    }
-
-    protected void takeCoin(Coin coin) {
+    protected void takeCoin(Coin coin) {  // TODO: should return taken coin! Take coin by value!
         if (CoinType.isUnrecognizedCoin(coin))
             throw new IllegalStateException("Unrecognized coin. Insert a another coin...");
 

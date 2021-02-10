@@ -2,23 +2,24 @@ package com.octopetrus.vendingmachine.machine;
 
 import com.octopetrus.vendingmachine.products.Product;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ProductsCtrl {
 
-    private final Map<Product, Integer> productsInMachine = new HashMap<>();
+    private final Map<Product, Integer> productsInMachine;
 
-    protected Map<Product, Integer> getProductsInMachine() {
+    public ProductsCtrl(Map<Product, Integer> productsInMachine) {
+        if (productsInMachine == null)
+            throw new IllegalArgumentException("The products controller of the vending machine cannot work without products.");
+
+        this.productsInMachine = productsInMachine;
+    }
+
+    protected Map<Product, Integer> getProductsInMachine() {  // TODO: give better name!
         return productsInMachine;
     }
 
-    protected void putProductsIntoMachine(Map<Product, Integer> products) {
-        if (products != null)
-            productsInMachine.putAll(products);
-    }
-
-    protected void takeProduct(Product product) {
+    protected void takeProduct(Product product) {  // TODO: should return taken product! Take product by ID!
         if (!productsInMachine.containsKey(product))
             throw new IllegalStateException(product.getName() + " not exist in the machine.");
 
