@@ -1,6 +1,7 @@
 package com.octopetrus.vendingmachine.machine;
 
 import com.octopetrus.vendingmachine.coins.Coin;
+import com.octopetrus.vendingmachine.coins.CoinType;
 import com.octopetrus.vendingmachine.products.Product;
 
 import java.util.HashMap;
@@ -10,6 +11,8 @@ public class Machine {
 
     private final Map<Product, Integer> productsInMachine = new HashMap<>();
     private final Map<Coin, Integer> coinsInMachine = new HashMap<>();
+    private double amountOfTakenCoins = 0;
+    private Coin takenCoin;
 
     public Machine() {}
 
@@ -47,5 +50,27 @@ public class Machine {
             productsInMachine.remove(product);
         else
             productsInMachine.put(product, actualAmount - 1);
+    }
+
+    public void takeCoin(Coin coin) {
+        if (CoinType.isUnrecognizedCoin(coin))
+            throw new IllegalStateException("Unrecognized coin. Insert a another coin...");
+
+        takenCoin = coin;
+        increaseAmountOfTakenCoins();
+        addCoinToMachine();
+    }
+
+    private void increaseAmountOfTakenCoins() {
+        amountOfTakenCoins = amountOfTakenCoins + CoinType.getValue(takenCoin);
+    }
+
+    private void addCoinToMachine() {
+        int actualAmount = coinsInMachine.get(takenCoin);
+        coinsInMachine.put(takenCoin, actualAmount + 1);
+    }
+
+    public double getAmountOfTakenCoins() {
+        return amountOfTakenCoins;
     }
 }

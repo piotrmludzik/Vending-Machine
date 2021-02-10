@@ -42,4 +42,12 @@ public enum CoinType {
     private static String getIllegalCoinTypeMessage(Coin coin) {
         return String.format("Not know a type of the given coin with weight = %sg and size = %s mm.", coin.weight, coin.size);
     }
+
+    public static boolean isUnrecognizedCoin(Coin coin) {
+        for (CoinType coinType : CoinType.values())
+            if (coin.weight == coinType.weight && coin.size == coinType.size)
+                return false;
+
+        return true;
+    }
 }
