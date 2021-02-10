@@ -17,8 +17,10 @@ public class Machine {
     public Machine() {}
 
     public Machine(Map<Product, Integer> products, Map<Coin, Integer> coins) {
-        productsInMachine.putAll(products);
-        coinsInMachine.putAll(coins);
+        if (products != null)
+            productsInMachine.putAll(products);
+        if (coins != null)
+            coinsInMachine.putAll(coins);
     }
 
     public Map<Product, Integer> getProductsInMachine() {
