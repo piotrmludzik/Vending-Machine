@@ -9,7 +9,7 @@ public class ProductsCtrl {
 
     private final Map<Product, Integer> productsInStock;
 
-    public ProductsCtrl(Map<Product, Integer> productsInStock) {
+    protected ProductsCtrl(Map<Product, Integer> productsInStock) {
         if (productsInStock == null)
             throw new IllegalArgumentException("The products controller of the vending machine cannot work without products.");
 

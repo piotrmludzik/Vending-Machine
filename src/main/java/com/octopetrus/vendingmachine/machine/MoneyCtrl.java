@@ -11,7 +11,7 @@ public class MoneyCtrl {
     private final Map<Coin, Integer> coinsInStock;
     private double amountOfTakenCoins = 0;
 
-    public MoneyCtrl(Map<Coin, Integer> coinsInStock) {
+    protected MoneyCtrl(Map<Coin, Integer> coinsInStock) {
         if (coinsInStock == null)
             throw new IllegalArgumentException("The money controller of the vending machine cannot work without coins.");
 
