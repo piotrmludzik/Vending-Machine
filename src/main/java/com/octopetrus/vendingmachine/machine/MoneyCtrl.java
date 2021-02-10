@@ -10,7 +10,6 @@ public class MoneyCtrl {
 
     private final Map<Coin, Integer> coinsInMachine = new HashMap<>();
     private double amountOfTakenCoins = 0;
-    private Coin takenCoin;
 
     protected Map<Coin, Integer> getCoinsInMachine() {
         return coinsInMachine;
@@ -25,21 +24,20 @@ public class MoneyCtrl {
         if (CoinType.isUnrecognizedCoin(coin))
             throw new IllegalStateException("Unrecognized coin. Insert a another coin...");
 
-        takenCoin = coin;
-        increaseAmountOfTakenCoins();
-        addCoinToMachine();
+        increaseAmountOfTakenCoins(coin);
+        addCoinToMachine(coin);
     }
 
-    private void increaseAmountOfTakenCoins() {
-        amountOfTakenCoins = amountOfTakenCoins + CoinType.getValue(takenCoin);
+    private void increaseAmountOfTakenCoins(Coin coin) {
+        amountOfTakenCoins = amountOfTakenCoins + CoinType.getValue(coin);
     }
 
-    private void addCoinToMachine() {
+    private void addCoinToMachine(Coin coin) {
         int actualAmount = 0;
-        if (coinsInMachine.containsKey(takenCoin))
-            actualAmount = coinsInMachine.get(takenCoin);
+        if (coinsInMachine.containsKey(coin))
+            actualAmount = coinsInMachine.get(coin);
 
-        coinsInMachine.put(takenCoin, actualAmount + 1);
+        coinsInMachine.put(coin, actualAmount + 1);
     }
 
     protected double getAmountOfTakenCoins() {
