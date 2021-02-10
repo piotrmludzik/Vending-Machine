@@ -1,5 +1,6 @@
 package com.octopetrus.vendingmachine.coins;
 
+// TODO: refactor monetary system from double to BigDecimal!
 public class Coin {
 
     public final double weight;
