@@ -2,6 +2,7 @@ package com.octopetrus.vendingmachine.machine;
 
 import com.octopetrus.vendingmachine.products.Product;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class ProductsCtrl {
@@ -15,8 +16,15 @@ public class ProductsCtrl {
         this.productsInStock = productsInStock;
     }
 
-    protected Map<Product, Integer> getProductsInStock() {  // TODO: should return a product names and amounts.
-        return productsInStock;
+    protected Map<String, Integer> getAmountOfProductsInStock() {
+        Map<String, Integer> products = new HashMap<>();
+        for (Map.Entry<Product, Integer> e : productsInStock.entrySet()) {
+            String productName = e.getKey().getName();
+            int productAmount = e.getValue();
+            products.put(productName, productAmount);
+        }
+
+        return products;
     }
 
     protected Product takeProduct(int productId) {
