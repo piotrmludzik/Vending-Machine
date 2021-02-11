@@ -10,7 +10,7 @@ import java.util.Map;
 public class MoneyCtrl {
 
     private final Map<Coin, Integer> coinsInStock;
-    private BigDecimal amountOfTakenCoins = BigDecimal.ONE;
+    private BigDecimal amountOfTakenCoins = BigDecimal.ZERO;
 
     protected MoneyCtrl(Map<Coin, Integer> coinsInStock) {
         if (coinsInStock == null)
