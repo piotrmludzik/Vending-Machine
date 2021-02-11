@@ -3,13 +3,14 @@ package com.octopetrus.vendingmachine.machine;
 import com.octopetrus.vendingmachine.coins.Coin;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MoneyCtrl {
 
     private final Map<Coin, Integer> coinsInStock;
-    private double amountOfTakenCoins = 0;
+    private BigDecimal amountOfTakenCoins = BigDecimal.ONE;
 
     protected MoneyCtrl(Map<Coin, Integer> coinsInStock) {
         if (coinsInStock == null)
@@ -29,7 +30,7 @@ public class MoneyCtrl {
         return coins;
     }
 
-    protected double getAmountOfTakenCoins() {
+    protected BigDecimal getAmountOfTakenCoins() {
         return amountOfTakenCoins;
     }
 
@@ -42,7 +43,7 @@ public class MoneyCtrl {
     }
 
     private void increaseAmountOfTakenCoins(Coin coin) {
-        amountOfTakenCoins = amountOfTakenCoins + CoinType.getValue(coin);
+        amountOfTakenCoins = amountOfTakenCoins.add(CoinType.getValue(coin));
     }
 
     private void addCoinToStock(Coin coin) {
