@@ -7,9 +7,7 @@ import com.octopetrus.vendingmachine.coins.CoinType;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,5 +82,29 @@ public class MoneyCtrlTest {
                 "Quarter dollar", 11);
 
         assertEquals(result, moneyCtrl.getAmountOfCoinsInStock());
+    }
+
+    @Test
+    public void giveChange_enoughMoney_validChange() {
+        MoneyCtrl moneyCtrl = new MoneyCtrl(defaultCoinsInStock);
+        List<Coin> givenChange = moneyCtrl.giveChange(BigDecimal.valueOf(0.40));
+
+        List<Coin> result = new LinkedList<>(){{
+            add(QUARTER);
+            add(DIME);
+            add(NICKEL);
+        }};
+
+        assertIterableEquals(result, givenChange);
+    }
+
+    @Test
+    public void giveChange_notEnoughMoney_IllegalStateException() {
+        MoneyCtrl moneyCtrl = new MoneyCtrl(new HashMap<>() {{
+            put(QUARTER, 10);
+            put(DIME, 20);
+        }});
+
+        assertThrows(IllegalStateException.class, () -> moneyCtrl.giveChange(BigDecimal.valueOf(0.05)));
     }
 }
