@@ -5,14 +5,11 @@ import com.octopetrus.vendingmachine.coins.CoinComparator;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class MoneyCtrl {
 
-    private final Map<Coin, Integer> coinsInStock = new TreeMap<>(new CoinComparator(new HashMap<>()));
+    private final TreeMap<Coin, Integer> coinsInStock = new TreeMap<>(new CoinComparator(new HashMap<>()));
     private BigDecimal amountOfTakenCoins = BigDecimal.ZERO;
 
     protected MoneyCtrl(Map<Coin, Integer> coinsInStock) {
@@ -42,18 +39,63 @@ public class MoneyCtrl {
             throw new IllegalStateException("Unrecognized coin. Insert a another coin...");
 
         increaseAmountOfTakenCoins(coin);
-        addCoinToStock(coin);
+        increaseCoin(coinsInStock, coin);
     }
 
     private void increaseAmountOfTakenCoins(Coin coin) {
         amountOfTakenCoins = amountOfTakenCoins.add(CoinType.getValue(coin));
     }
 
-    private void addCoinToStock(Coin coin) {
-        int actualAmount = 0;
-        if (coinsInStock.containsKey(coin))
-            actualAmount = coinsInStock.get(coin);
+    protected List<Coin> giveChange(BigDecimal changeAmount) {
+        List<Coin> changeToGive = new LinkedList<>();
+        for (Map.Entry<Coin, Integer> e : coinsInStock.entrySet()) {  // iterate by coin types
+            Coin coin = e.getKey();
 
-        coinsInStock.put(coin, actualAmount + 1);
+            for (int n=1; n <= e.getValue(); n++) {  // iterate by coin amount
+                if (isToBigValueToSpendChange(changeAmount, coin))
+                    break;  // go to the next coin type
+
+                moveCoinFromStockToChangeToGive(changeToGive, coin);
+                changeAmount = changeAmount.subtract(CoinType.getValue(coin));
+
+                if (isChangeAmountIsZero(changeAmount)) {
+                    amountOfTakenCoins = BigDecimal.ZERO;
+                    return changeToGive;
+                }
+            }
+        }
+
+        throw new IllegalStateException("Could not spend the change.");
+    }
+
+    private boolean isToBigValueToSpendChange(BigDecimal changeAmount, Coin coin) {
+        BigDecimal coinValue = CoinType.getValue(coin);
+        BigDecimal predictedChangeAmount = changeAmount.subtract(coinValue);
+        return predictedChangeAmount.compareTo(BigDecimal.ZERO) < 0;
+    }
+
+    private void moveCoinFromStockToChangeToGive(List<Coin> changeToGive, Coin coin) {
+        changeToGive.add(coin);
+        decreaseCoin(coinsInStock, coin);
+    }
+
+    private boolean isChangeAmountIsZero(BigDecimal changeAmount) {
+        return changeAmount.compareTo(BigDecimal.ZERO) == 0;
+    }
+
+    private void increaseCoin(Map<Coin, Integer> stock, Coin coin) {
+        int count = stock.getOrDefault(coin, 0);
+        stock.put(coin, count + 1);
+    }
+
+    private void decreaseCoin(Map<Coin, Integer> stock, Coin coin) {
+        if (!stock.containsKey(coin))
+            throw new IllegalStateException("Cannot decrease a coin that is not in stock.");
+
+        int count = stock.get(coin);
+        if (count == 1)
+            stock.remove(coin);
+        else
+            stock.put(coin, count - 1);
     }
 }
