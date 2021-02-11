@@ -34,7 +34,7 @@ public class MoneyCtrl {
         return amountOfTakenCoins;
     }
 
-    protected void takeCoin(Coin coin) {  // TODO: should return taken coin! Take coin by value!
+    protected void takeCoin(Coin coin) {
         if (CoinType.isUnrecognizedCoin(coin))
             throw new IllegalStateException("Unrecognized coin. Insert a another coin...");
 
