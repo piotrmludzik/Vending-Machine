@@ -1,5 +1,7 @@
 package com.octopetrus.vendingmachine.products;
 
+import java.util.Objects;
+
 public class Product {
 
     private final int id;
@@ -25,6 +27,20 @@ public class Product {
 
     public double getPrice() {
         return price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Product product = (Product) o;
+        return id == product.id && Double.compare(product.price, price) == 0 && name.equals(product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price);
     }
 
     @Override
