@@ -99,6 +99,23 @@ public class MoneyCtrlTest {
     }
 
     @Test
+    public void giveChange_enoughMoney_moneySpentInOneDenomination() {
+        MoneyCtrl moneyCtrl = new MoneyCtrl(new HashMap<>() {{
+            put(QUARTER, 5);
+            put(DIME, 7);
+            put(NICKEL, 10);
+        }});
+        List<Coin> givenChange = moneyCtrl.giveChange(BigDecimal.valueOf(0.20));
+
+        List<Coin> result = new LinkedList<>(){{
+            add(DIME);
+            add(DIME);
+        }};
+
+        assertIterableEquals(result, givenChange);
+    }
+
+    @Test
     public void giveChange_notEnoughMoney_IllegalStateException() {
         MoneyCtrl moneyCtrl = new MoneyCtrl(new HashMap<>() {{
             put(QUARTER, 10);
