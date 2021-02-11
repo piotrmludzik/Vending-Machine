@@ -14,14 +14,6 @@ public class CoinComparator implements Comparator<Coin> {
         BigDecimal c1Value = CoinType.getValue(c1);
         BigDecimal c2Value = CoinType.getValue(c2);
 
-        int result = c1Value.compareTo(c2Value);
-        switch (result) {
-            case 1:
-                return -1;
-            case -1:
-                return 1;
-            default:
-                return 0;
-        }
+        return -(c1Value.compareTo(c2Value));
     }
 }
