@@ -8,9 +8,10 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MoneyCtrlTest {
 
@@ -28,12 +29,13 @@ public class MoneyCtrlTest {
     public void getAmountOfCoinsInStock_coinsInStock_returnCoinsNameAndAmount() {
         MoneyCtrl moneyCtrl= new MoneyCtrl(defaultCoinsInStock);
 
-        Map<String, Integer> result = Map.of(
-                "Nickel", 50,
-                "Dime", 25,
-                "Quarter dollar", 10);
+        Map<String, Integer> result = new LinkedHashMap<>() {{
+                put("Quarter dollar", 10);
+                put("Dime", 25);
+                put("Nickel", 50);
+        }};
 
-        assertEquals(result, moneyCtrl.getAmountOfCoinsInStock());
+        assertIterableEquals(result.entrySet(), moneyCtrl.getAmountOfCoinsInStock().entrySet());
     }
 
     @Test

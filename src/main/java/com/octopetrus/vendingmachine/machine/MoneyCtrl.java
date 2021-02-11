@@ -1,26 +1,29 @@
 package com.octopetrus.vendingmachine.machine;
 
 import com.octopetrus.vendingmachine.coins.Coin;
+import com.octopetrus.vendingmachine.coins.CoinComparator;
 import com.octopetrus.vendingmachine.coins.CoinType;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class MoneyCtrl {
 
-    private final Map<Coin, Integer> coinsInStock;
+    private final Map<Coin, Integer> coinsInStock = new TreeMap<>(new CoinComparator(new HashMap<>()));
     private BigDecimal amountOfTakenCoins = BigDecimal.ZERO;
 
     protected MoneyCtrl(Map<Coin, Integer> coinsInStock) {
         if (coinsInStock == null)
             throw new IllegalArgumentException("The money controller of the vending machine cannot work without coins.");
 
-        this.coinsInStock = coinsInStock;
+        this.coinsInStock.putAll(coinsInStock);
     }
 
     protected Map<String, Integer> getAmountOfCoinsInStock() {
-        Map<String, Integer> coins = new HashMap<>();
+        Map<String, Integer> coins = new LinkedHashMap<>();
         for (Map.Entry<Coin, Integer> e : coinsInStock.entrySet()) {
             String coinName = CoinType.getName(e.getKey());
             int coinAmount = e.getValue();
