@@ -18,7 +18,7 @@ public class MoneyCtrlTest {
     private final Coin DIME = CoinFactory.createCoin(CoinType.DIME);        // 0.10$
     private final Coin QUARTER = CoinFactory.createCoin(CoinType.QUARTER);  // 0.25$
 
-    private final Map<Coin, Integer> coinsInStock =  new HashMap<>() {{
+    private final Map<Coin, Integer> defaultCoinsInStock =  new HashMap<>() {{
         put(NICKEL, 50);
         put(DIME, 25);
         put(QUARTER, 10);
@@ -26,7 +26,7 @@ public class MoneyCtrlTest {
 
     @Test
     public void getAmountOfCoinsInStock_coinsInStock_returnCoinsNameAndAmount() {
-        MoneyCtrl moneyCtrl= new MoneyCtrl(coinsInStock);
+        MoneyCtrl moneyCtrl= new MoneyCtrl(defaultCoinsInStock);
 
         Map<String, Integer> result = Map.of(
                 "Nickel", 50,
@@ -73,7 +73,7 @@ public class MoneyCtrlTest {
 
     @Test
     public void takeCoin_validCoinExistInMachine_addCoinToMachine() {
-        MoneyCtrl moneyCtrl= new MoneyCtrl(coinsInStock);
+        MoneyCtrl moneyCtrl= new MoneyCtrl(defaultCoinsInStock);
         moneyCtrl.takeCoin(QUARTER);
 
         Map<String, Integer> result = Map.of(
